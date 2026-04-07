@@ -50,7 +50,7 @@ const displayed = projects.slice(0, limit);
 
     <div class="portfolio__grid">
       {displayed.map((project, i) => (
-        <article class="portfolio__item reveal" style={`transition-delay: ${i * 80}ms`}>
+        <a href={`/portfolio/${project.slug}`} class="portfolio__item reveal" style={`transition-delay: ${i * 80}ms`}>
           <div class="portfolio__img-wrap">
             <Image
               src={project.image}
@@ -73,7 +73,7 @@ const displayed = projects.slice(0, limit);
               {project.size && <span> &middot; {project.size}</span>}
             </p>
           </div>
-        </article>
+        </a>
       ))}
     </div>
   </div>
@@ -99,6 +99,9 @@ const displayed = projects.slice(0, limit);
 
   .portfolio__item {
     cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
   }
 
   .portfolio__img-wrap {
