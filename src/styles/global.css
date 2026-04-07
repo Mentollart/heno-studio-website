@@ -316,6 +316,37 @@ img {
   top: 0;
 }
 
+/* --- Email Toast Notification --- */
+.email-toast {
+  position: fixed;
+  bottom: calc(var(--sticky-cta-height) + var(--space-lg));
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--color-primary);
+  color: var(--color-white);
+  padding: var(--space-md) var(--space-xl);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+  max-width: 90vw;
+}
+
+.email-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+@media (min-width: 768px) {
+  .email-toast {
+    bottom: var(--space-2xl);
+  }
+}
+
 /* --- Reduced Motion --- */
 @media (prefers-reduced-motion: reduce) {
   *,

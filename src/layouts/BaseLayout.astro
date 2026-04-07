@@ -130,6 +130,9 @@ const canonical = canonicalUrl || new URL(Astro.url.pathname, siteUrl).href;
       <Fragment set:html="" />
     </slot>
 
+    <!-- Toast element for email copy -->
+    <div class="email-toast" id="email-toast"></div>
+
     <!-- Scroll Reveal Script -->
     <script>
       const observer = new IntersectionObserver(
@@ -145,6 +148,37 @@ const canonical = canonicalUrl || new URL(Astro.url.pathname, siteUrl).href;
       );
 
       document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    </script>
+
+    <!-- Mailto clipboard fallback -->
+    <script>
+      const toast = document.getElementById('email-toast');
+      let toastTimeout: ReturnType<typeof setTimeout>;
+
+      function showToast(email: string) {
+        if (!toast) return;
+        toast.textContent = `${email} — skopiowano do schowka!`;
+        toast.classList.add('show');
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => toast.classList.remove('show'), 3500);
+      }
+
+      document.querySelectorAll('a[href^="mailto:"]').forEach((link) => {
+        link.addEventListener('click', (e) => {
+          const href = (link as HTMLAnchorElement).href;
+          const email = href.replace('mailto:', '').split('?')[0];
+
+          // Copy email to clipboard
+          if (navigator.clipboard) {
+            navigator.clipboard.writeText(email).then(() => {
+              showToast(email);
+            });
+          }
+
+          // Let the mailto: link fire naturally — if email client exists, it opens.
+          // If not, user still has the email copied to clipboard via the toast.
+        });
+      });
     </script>
   </body>
 </html>
