@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Stats from '../components/Stats.astro';
+import ServicesPreview from '../components/ServicesPreview.astro';
+import PortfolioGrid from '../components/PortfolioGrid.astro';
+import ProcessTimeline from '../components/ProcessTimeline.astro';
+import AboutPreview from '../components/AboutPreview.astro';
+import FAQ from '../components/FAQ.astro';
+import Testimonials from '../components/Testimonials.astro';
+import Map from '../components/Map.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Architekt wnętrz Wrocław | Heno Studio"
+  description="Profesjonalne projekty mieszkań i domów we Wrocławiu. Projekt koncepcyjny od 150 zł/m². 6+ lat doświadczenia, 50+ projektów. Darmowa wycena."
+>
+  <Header slot="header" transparent={true} />
+
+  <Hero />
+  <Stats />
+  <ServicesPreview />
+  <PortfolioGrid limit={6} showMore={true} />
+  <Testimonials />
+  <ProcessTimeline />
+  <AboutPreview />
+  <FAQ />
+  <Map height="350px" />
+  <ContactCTA variant="dark" />
+
+  <Footer slot="footer" />
+</BaseLayout>

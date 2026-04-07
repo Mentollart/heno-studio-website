@@ -1,0 +1,154 @@
+---
+const steps = [
+  {
+    number: '01',
+    title: 'Poznanie potrzeb i przestrzeni',
+    description: 'Projekt rozpoczynamy od rozmowy o Twoich oczekiwaniach i stylu życia. We Wrocławiu i okolicach wykonujemy inwentaryzację — dokładne pomiary i dokumentację fotograficzną.',
+  },
+  {
+    number: '02',
+    title: 'Układy funkcjonalne',
+    description: 'Przygotowujemy co najmniej 2 warianty układu funkcjonalnego każdego pomieszczenia. Wspólnie omawiamy zalety każdego rozwiązania i wybieramy optymalny układ.',
+  },
+  {
+    number: '03',
+    title: 'Wizualizacje 3D',
+    description: 'Tworzymy dwie koncepcje materiałowe z fotorealistycznymi wizualizacjami. Zobaczysz swoje wnętrze jeszcze przed rozpoczęciem prac — z możliwością naniesienia poprawek.',
+  },
+  {
+    number: '04',
+    title: 'Podsumowanie i realizacja',
+    description: 'Dostarczamy kompletną dokumentację: rysunki techniczne, wizualizacje, szczegółowe listy materiałów. Na życzenie koordynujemy prace wykonawcze i wspieramy aż do gotowego wnętrza.',
+  },
+];
+---
+
+<section class="process section" id="proces">
+  <div class="container">
+    <div class="process__header text-center reveal">
+      <p class="section-label">Jak pracujemy</p>
+      <h2 class="section-title">Od pomysłu do gotowego wnętrza</h2>
+      <p class="section-subtitle mx-auto">
+        Projekt wnętrza to złożony proces, a moim zadaniem jest wsparcie Klienta na każdym etapie&nbsp;współpracy.
+      </p>
+    </div>
+
+    <div class="process__timeline">
+      {steps.map((step, i) => (
+        <div class="process__step reveal" style={`transition-delay: ${i * 150}ms`}>
+          <div class="process__step-number">{step.number}</div>
+          <div class="process__step-content">
+            <h3 class="process__step-title">{step.title}</h3>
+            <p class="process__step-desc">{step.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="process__cta text-center reveal">
+      <a href="/proces" class="btn btn--secondary">Poznaj szczegóły procesu</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .process__header {
+    margin-bottom: var(--space-3xl);
+  }
+
+  .process__timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: var(--space-2xl);
+    position: relative;
+  }
+
+  .process__timeline::before {
+    content: '';
+    position: absolute;
+    left: 24px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--color-border);
+  }
+
+  .process__step {
+    display: flex;
+    gap: var(--space-xl);
+    padding: var(--space-xl) 0;
+    position: relative;
+  }
+
+  .process__step-number {
+    font-family: var(--font-heading);
+    font-size: var(--text-2xl);
+    color: var(--color-secondary);
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg);
+    border: 2px solid var(--color-secondary-light);
+    border-radius: 50%;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .process__step-content {
+    padding-top: var(--space-sm);
+  }
+
+  .process__step-title {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-sm);
+  }
+
+  .process__step-desc {
+    font-size: var(--text-base);
+    color: var(--color-text-light);
+    max-width: 500px;
+    margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    .process__timeline::before {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .process__step {
+      width: 50%;
+      padding: var(--space-2xl) 0;
+    }
+
+    .process__step:nth-child(odd) {
+      align-self: flex-start;
+      flex-direction: row-reverse;
+      text-align: right;
+      padding-right: var(--space-2xl);
+    }
+
+    .process__step:nth-child(odd) .process__step-number {
+      position: absolute;
+      right: -24px;
+    }
+
+    .process__step:nth-child(odd) .process__step-desc {
+      margin-left: auto;
+    }
+
+    .process__step:nth-child(even) {
+      align-self: flex-end;
+      padding-left: var(--space-2xl);
+    }
+
+    .process__step:nth-child(even) .process__step-number {
+      position: absolute;
+      left: -24px;
+    }
+  }
+</style>

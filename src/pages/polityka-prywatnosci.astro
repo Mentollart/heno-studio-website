@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Polityka prywatności | Heno Studio"
+  description="Polityka prywatności Heno Studio — informacje o przetwarzaniu danych osobowych."
+>
+  <Header slot="header" />
+
+  <section class="privacy-page">
+    <div class="container container--narrow">
+      <h1>Polityka prywatności</h1>
+
+      <h2>1. Administrator danych</h2>
+      <p>
+        Administratorem danych osobowych jest Heno Studio, Patrycja Zarzycka-Paluch, NIP: 8943150102, z&nbsp;siedzibą we Wrocławiu.
+      </p>
+
+      <h2>2. Kontakt</h2>
+      <p>
+        W sprawach związanych z ochroną danych osobowych można kontaktować się pod adresem e-mail:
+        <a href="mailto:kontakt@henostudio.com">kontakt@henostudio.com</a>.
+      </p>
+
+      <h2>3. Zakres przetwarzanych danych</h2>
+      <p>
+        Przetwarzamy dane osobowe wyłącznie w zakresie niezbędnym do świadczenia usług projektowania wnętrz, odpowiedzi na zapytania oraz kontaktu z klientami. Dane mogą obejmować: imię i nazwisko, adres e-mail, numer telefonu.
+      </p>
+
+      <h2>4. Cel przetwarzania</h2>
+      <p>Dane przetwarzane są w celu:</p>
+      <ul>
+        <li>odpowiedzi na zapytania ofertowe,</li>
+        <li>realizacji usług projektowych,</li>
+        <li>wystawiania faktur i dokumentów księgowych.</li>
+      </ul>
+
+      <h2>5. Prawa użytkownika</h2>
+      <p>
+        Przysługuje Ci prawo dostępu do danych, ich sprostowania, usunięcia, ograniczenia przetwarzania oraz przenoszenia danych. Masz również prawo do cofnięcia zgody na przetwarzanie danych w dowolnym momencie.
+      </p>
+
+      <h2>6. Pliki cookies</h2>
+      <p>
+        Strona nie korzysta z plików cookies śledzących. Mogą być wykorzystywane wyłącznie cookies techniczne, niezbędne do prawidłowego działania witryny.
+      </p>
+
+      <p class="privacy-page__updated">Ostatnia aktualizacja: kwiecień 2026</p>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .privacy-page {
+    padding-top: calc(var(--header-height) + var(--space-3xl));
+    padding-bottom: var(--space-4xl);
+  }
+
+  .privacy-page h1 {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .privacy-page h2 {
+    font-size: var(--text-xl);
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-md);
+  }
+
+  .privacy-page p,
+  .privacy-page li {
+    font-size: var(--text-base);
+    line-height: 1.8;
+    color: var(--color-text-light);
+  }
+
+  .privacy-page ul {
+    padding-left: var(--space-xl);
+    margin-bottom: var(--space-md);
+  }
+
+  .privacy-page__updated {
+    margin-top: var(--space-3xl);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+</style>

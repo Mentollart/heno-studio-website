@@ -1,0 +1,81 @@
+---
+import { Image } from 'astro:assets';
+import patrycjaImg from '../assets/images/patrycja.png';
+---
+
+<section class="about-preview section">
+  <div class="container">
+    <div class="about-preview__grid reveal">
+      <div class="about-preview__image-wrap">
+        <Image
+          src={patrycjaImg}
+          alt="Patrycja Zarzycka-Paluch — architekt wnętrz, założycielka Heno Studio"
+          widths={[400, 600, 800]}
+          sizes="(max-width: 768px) 100vw, 50vw"
+          format="webp"
+          quality={80}
+          loading="lazy"
+          class="about-preview__image"
+        />
+      </div>
+      <div class="about-preview__content">
+        <p class="section-label">O mnie</p>
+        <h2 class="section-title">Patrycja Zarzycka&#8209;Paluch</h2>
+        <p class="about-preview__role">Architekt wnętrz &middot; Założycielka Heno Studio</p>
+        <p>
+          Jestem absolwentką Wydziału Architektury Politechniki Wrocławskiej. Doświadczenie zawodowe zdobywałam we wrocławskich pracowniach architektury wnętrz.
+        </p>
+        <p>
+          W&nbsp;centrum mojego podejścia do projektowania zawsze stoi człowiek. Tworzę wnętrza dopasowane do realnych potrzeb użytkowników, łącząc funkcjonalność z&nbsp;estetyką.
+        </p>
+        <a href="/o-heno" class="btn btn--secondary">Poznaj mnie bliżej</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-preview__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3xl);
+    align-items: center;
+  }
+
+  .about-preview__image-wrap {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    max-height: 500px;
+  }
+
+  .about-preview__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .about-preview__role {
+    font-size: var(--text-sm);
+    color: var(--color-secondary-dark);
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    margin-bottom: var(--space-lg);
+  }
+
+  .about-preview__content p {
+    font-size: var(--text-base);
+    line-height: 1.8;
+  }
+
+  .about-preview__content .btn {
+    margin-top: var(--space-lg);
+  }
+
+  @media (min-width: 768px) {
+    .about-preview__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

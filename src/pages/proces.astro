@@ -1,0 +1,174 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import Footer from '../components/Footer.astro';
+import { Image } from 'astro:assets';
+
+import imgStep1 from '../assets/images/proces-1.jpg';
+import imgStep2 from '../assets/images/proces-2.png';
+import imgStep3 from '../assets/images/proces-3.jpg';
+import imgStep4 from '../assets/images/proces-4.jpg';
+
+const steps = [
+  {
+    number: '01',
+    title: 'Poznanie potrzeb i przestrzeni',
+    description: 'Projekt rozpoczynamy od rozmowy o Twoich oczekiwaniach, stylu życia i preferencjach estetycznych. We Wrocławiu i okolicach wykonuję inwentaryzację — dokładne pomiary pomieszczeń i dokumentację fotograficzną. Na tej podstawie powstaje kompleksowy obraz Twoich potrzeb.',
+    image: imgStep1,
+    alt: 'Rozmowa z klientem o projekcie wnętrza',
+  },
+  {
+    number: '02',
+    title: 'Układy funkcjonalne',
+    description: 'Przygotowuję co najmniej 2 warianty układu funkcjonalnego każdego pomieszczenia. Wspólnie omawiamy zalety i wady poszczególnych rozwiązań — tak, by wybrany układ idealnie odpowiadał Twojemu codziennemu życiu.',
+    image: imgStep2,
+    alt: 'Układ funkcjonalny mieszkania — rzut z góry',
+  },
+  {
+    number: '03',
+    title: 'Wizualizacje 3D',
+    description: 'Tworzę dwie koncepcje materiałowe z fotorealistycznymi wizualizacjami 3D. Zobaczysz swoje wnętrze jeszcze przed rozpoczęciem jakichkolwiek prac. Na tym etapie masz możliwość nanoszenia poprawek — aż do pełnej satysfakcji.',
+    image: imgStep3,
+    alt: 'Wizualizacja 3D sypialni — projekt Heno Studio',
+  },
+  {
+    number: '04',
+    title: 'Podsumowanie i realizacja',
+    description: 'Dostarczam kompletną dokumentację: rysunki techniczne, wizualizacje finalne i szczegółowe listy materiałów z linkami do produktów. W przypadku projektu z nadzorem — koordynuję prace wykonawcze i dostawy, wspierając Cię aż do gotowego wnętrza.',
+    image: imgStep4,
+    alt: 'Gotowa sypialnia — realizacja projektu Heno Studio',
+  },
+];
+---
+
+<BaseLayout
+  title="Proces | Jak pracujemy — Heno Studio, architekt wnętrz Wrocław"
+  description="Poznaj nasz proces projektowy: od bezpłatnej konsultacji, przez układy funkcjonalne i wizualizacje 3D, po kompletną dokumentację i nadzór nad realizacją."
+>
+  <Header slot="header" />
+
+  <section class="page-header">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Ścieżka nawigacji">
+        <a href="/">Strona główna</a>
+        <span>/</span>
+        <span aria-current="page">Proces</span>
+      </nav>
+      <h1 class="page-header__title">Jak pracujemy</h1>
+      <p class="page-header__desc">
+        Projekt wnętrza to złożony proces, a moim zadaniem jest wsparcie Klienta na każdym etapie współpracy — od pierwszej rozmowy po klucz w&nbsp;drzwiach.
+      </p>
+    </div>
+  </section>
+
+  <section class="process-detail section">
+    <div class="container">
+      {steps.map((step, i) => (
+        <article class="step reveal" style={`transition-delay: ${i * 120}ms`}>
+          <div class="step__image-wrap">
+            <Image
+              src={step.image}
+              alt={step.alt}
+              widths={[400, 600, 800]}
+              sizes="(max-width: 768px) 100vw, 50vw"
+              format="webp"
+              quality={75}
+              loading={i === 0 ? 'eager' : 'lazy'}
+              class="step__image"
+            />
+          </div>
+          <div class="step__content">
+            <span class="step__number">{step.number}</span>
+            <h2 class="step__title">{step.title}</h2>
+            <p class="step__desc">{step.description}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <ContactCTA variant="dark" />
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-top: calc(var(--header-height) + var(--space-3xl));
+    padding-bottom: var(--space-2xl);
+    background: var(--color-bg-warm);
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .breadcrumb a { color: var(--color-text-muted); }
+  .breadcrumb a:hover { color: var(--color-secondary-dark); }
+
+  .page-header__title { margin-bottom: var(--space-md); }
+  .page-header__desc {
+    font-size: var(--text-lg);
+    color: var(--color-text-light);
+    max-width: 640px;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    padding: var(--space-3xl) 0;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .step:last-child { border-bottom: none; }
+
+  .step__image-wrap {
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    background: var(--color-bg-warm);
+  }
+
+  .step__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .step__number {
+    font-family: var(--font-heading);
+    font-size: var(--text-4xl);
+    color: var(--color-secondary-light);
+    display: block;
+    margin-bottom: var(--space-sm);
+    line-height: 1;
+  }
+
+  .step__title {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-lg);
+  }
+
+  .step__desc {
+    font-size: var(--text-base);
+    line-height: 1.8;
+    color: var(--color-text-light);
+    max-width: 500px;
+  }
+
+  @media (min-width: 768px) {
+    .step {
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+    }
+
+    .step:nth-child(even) .step__image-wrap {
+      order: 2;
+    }
+  }
+</style>

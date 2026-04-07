@@ -1,0 +1,76 @@
+---
+const stats = [
+  { number: '50+', label: 'zrealizowanych projektów', icon: 'projects' },
+  { number: '6+', label: 'lat doświadczenia', icon: 'years' },
+  { number: '100%', label: 'sprawdzeni wykonawcy', icon: 'contractors' },
+  { number: 'pod klucz', label: 'kompleksowa obsługa', icon: 'support' },
+];
+---
+
+<section class="stats" aria-label="Heno Studio w liczbach">
+  <div class="container">
+    <div class="stats__grid">
+      {stats.map((stat, i) => (
+        <div class="stats__item reveal" style={`transition-delay: ${i * 100}ms`}>
+          <span class="stats__number">{stat.number}</span>
+          <span class="stats__label">{stat.label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .stats {
+    background-color: var(--color-bg-dark);
+    padding: var(--space-3xl) 0;
+  }
+
+  .stats__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2xl) var(--space-xl);
+    text-align: center;
+  }
+
+  .stats__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .stats__number {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 2rem + 3vw, 3.5rem);
+    font-weight: 300;
+    color: var(--color-secondary);
+    line-height: 1;
+  }
+
+  .stats__label {
+    font-size: var(--text-sm);
+    color: rgba(255, 255, 255, 0.65);
+    max-width: 160px;
+  }
+
+  @media (min-width: 768px) {
+    .stats__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .stats__item {
+      position: relative;
+    }
+
+    .stats__item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 10%;
+      height: 80%;
+      width: 1px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+</style>

@@ -1,0 +1,227 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import Footer from '../components/Footer.astro';
+import { Image } from 'astro:assets';
+
+import patrycjaImg from '../assets/images/patrycja.png';
+---
+
+<BaseLayout
+  title="O Heno Studio | Patrycja Zarzycka-Paluch — architekt wnętrz Wrocław"
+  description="Poznaj Heno Studio i jego założycielkę — Patrycję Zarzyckę-Paluch, absolwentkę Politechniki Wrocławskiej z ponad 6-letnim doświadczeniem w projektowaniu wnętrz."
+>
+  <Header slot="header" />
+
+  <section class="page-header">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Ścieżka nawigacji">
+        <a href="/">Strona główna</a>
+        <span>/</span>
+        <span aria-current="page">O Heno</span>
+      </nav>
+      <h1 class="page-header__title">O Heno Studio</h1>
+    </div>
+  </section>
+
+  <section class="about section">
+    <div class="container">
+      <div class="about__grid">
+        <div class="about__image-col reveal">
+          <div class="about__image-wrap">
+            <Image
+              src={patrycjaImg}
+              alt="Patrycja Zarzycka-Paluch — architekt wnętrz, założycielka Heno Studio we Wrocławiu"
+              widths={[400, 600, 800]}
+              sizes="(max-width: 768px) 100vw, 45vw"
+              format="webp"
+              quality={80}
+              loading="eager"
+              class="about__image"
+            />
+          </div>
+        </div>
+
+        <div class="about__content reveal" style="transition-delay: 150ms">
+          <p class="section-label">Architekt wnętrz</p>
+          <h2>Patrycja Zarzycka&#8209;Paluch</h2>
+
+          <p class="about__lead">
+            Nazywam się Patrycja Zarzycka-Paluch i jestem absolwentką Wydziału Architektury Politechniki Wrocławskiej.
+          </p>
+
+          <p>
+            Doświadczenie zawodowe zdobywałam we wrocławskich pracowniach architektury wnętrz. W&nbsp;2020 roku założyłam Heno Studio, w&nbsp;ramach którego zrealizowałam już kilkadziesiąt projektów dla klientów indywidualnych.
+          </p>
+
+          <p>
+            W&nbsp;centrum mojego podejścia do projektowania zawsze stoi człowiek. Tworzę wnętrza dopasowane do realnych potrzeb użytkowników, łącząc funkcjonalność z&nbsp;estetyką i&nbsp;dbając o&nbsp;to, by każda przestrzeń była spójna z&nbsp;osobowością i&nbsp;stylem życia moich klientów.
+          </p>
+
+          <div class="about__values">
+            <h3>Moje podejście</h3>
+            <ul>
+              <li>
+                <strong>Człowiek w centrum</strong> — projektuję dla ludzi, nie dla zdjęć. Każde wnętrze ma odpowiadać codziennym potrzebom.
+              </li>
+              <li>
+                <strong>Funkcja i estetyka</strong> — piękne wnętrze, które nie jest funkcjonalne, nie jest dobrym projektem. Łączę oba aspekty.
+              </li>
+              <li>
+                <strong>Transparentność</strong> — jasne zasady współpracy, widoczne ceny, brak ukrytych kosztów.
+              </li>
+              <li>
+                <strong>Wsparcie na każdym etapie</strong> — od inspiracji po nadzór nad realizacją. Nie zostawiam klienta samego.
+              </li>
+            </ul>
+          </div>
+
+          <div class="about__credentials">
+            <div class="about__credential">
+              <span class="about__credential-number">50+</span>
+              <span class="about__credential-label">zrealizowanych projektów</span>
+            </div>
+            <div class="about__credential">
+              <span class="about__credential-number">2020</span>
+              <span class="about__credential-label">rok założenia</span>
+            </div>
+            <div class="about__credential">
+              <span class="about__credential-number">PWr</span>
+              <span class="about__credential-label">Politechnika Wrocławska</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ContactCTA variant="dark" />
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-top: calc(var(--header-height) + var(--space-3xl));
+    padding-bottom: var(--space-2xl);
+    background: var(--color-bg-warm);
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .breadcrumb a { color: var(--color-text-muted); }
+  .breadcrumb a:hover { color: var(--color-secondary-dark); }
+
+  .page-header__title { margin-bottom: 0; }
+
+  .about__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3xl);
+    align-items: start;
+  }
+
+  .about__image-wrap {
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    position: sticky;
+    top: calc(var(--header-height) + var(--space-xl));
+  }
+
+  .about__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .about__lead {
+    font-size: var(--text-lg);
+    color: var(--color-text);
+    font-weight: 400;
+    line-height: 1.7;
+  }
+
+  .about__content h2 {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-xl);
+  }
+
+  .about__content p {
+    line-height: 1.8;
+    font-size: var(--text-base);
+  }
+
+  .about__values {
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-2xl);
+    border-top: 1px solid var(--color-border-light);
+  }
+
+  .about__values h3 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-lg);
+  }
+
+  .about__values ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .about__values li {
+    font-size: var(--text-base);
+    color: var(--color-text-light);
+    line-height: 1.7;
+    padding-left: var(--space-lg);
+    border-left: 2px solid var(--color-secondary-light);
+  }
+
+  .about__values strong {
+    color: var(--color-primary);
+    display: block;
+    margin-bottom: var(--space-xs);
+  }
+
+  .about__credentials {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-2xl);
+    border-top: 1px solid var(--color-border-light);
+  }
+
+  .about__credential {
+    text-align: center;
+  }
+
+  .about__credential-number {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: var(--text-3xl);
+    color: var(--color-primary);
+    line-height: 1.2;
+  }
+
+  .about__credential-label {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  @media (min-width: 768px) {
+    .about__grid {
+      grid-template-columns: 5fr 7fr;
+    }
+  }
+</style>

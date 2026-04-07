@@ -1,0 +1,107 @@
+---
+const faqs = [
+  {
+    question: 'Co zyskuję na współpracy z architektem wnętrz?',
+    answer: 'Przede wszystkim — spokój i pewność, że wnętrze wyjdzie dokładnie tak, jak sobie wymarzyłeś. Zamiast samodzielnie koordynować dziesiątki decyzji, otrzymujesz gotowy projekt z pełnym opisem, rysunkami technicznymi i szczegółową listą zakupów. Unikasz kosztownych błędów na etapie budowy, a dostęp do sprawdzonych wykonawców i dostawców często pozwala zaoszczędzić więcej, niż wynosi honorarium architekta.',
+  },
+  {
+    question: 'Czy mam wpływ na wygląd projektu?',
+    answer: 'Absolutnie — projekt tworzę razem z Tobą, nie dla Ciebie. Proces zawsze zaczyna się od szczegółowej rozmowy o Twoich potrzebach, stylu życia i inspiracjach. Na każdym etapie masz możliwość wprowadzania poprawek, a stały kontakt gwarantuje, że żadna decyzja nie zostanie podjęta bez Twojej wiedzy. Efekt końcowy to wnętrze, które naprawdę odzwierciedla Twój charakter.',
+  },
+  {
+    question: 'Czy współpraca z architektem wnętrz jest wyłącznie dla klientów "premium"?',
+    answer: 'Nie — to jeden z najczęstszych mitów. Projektuję wnętrza w bardzo różnych przedziałach budżetowych. Potrafię stworzyć piękną, spójną przestrzeń korzystając z materiałów dostępnych w IKEA, Leroy Merlin czy Westwing. Kluczem jest dobry projekt i przemyślane zestawienie — nie cena metek.',
+  },
+  {
+    question: 'W którym momencie najlepiej zgłosić się po projekt?',
+    answer: 'Im wcześniej, tym więcej możemy razem zyskać. Najlepszy moment to etap przed podpisaniem umowy deweloperskiej lub zaraz po — wtedy mam realny wpływ na układ instalacji, przebieg ścian, a nawet wybór lokalizacji gniazdek. Ale nawet jeśli remont już startuje, doświadczenie pozwala mi szybko znaleźć optymalne rozwiązania.',
+  },
+  {
+    question: 'Jak wygląda bezpłatna wycena?',
+    answer: 'Napisz e-mail lub zadzwoń — opowiedz o swoim wnętrzu, metrażu i oczekiwaniach. Na tej podstawie przygotujemy spersonalizowaną wycenę w ciągu 24 godzin. Nie zobowiązuje Cię to do niczego — to pierwszy krok do poznania możliwości współpracy.',
+  },
+];
+---
+
+<section class="faq section--warm section" id="faq">
+  <div class="container container--narrow">
+    <div class="faq__header text-center reveal">
+      <p class="section-label">FAQ</p>
+      <h2 class="section-title">Najczęstsze pytania</h2>
+    </div>
+
+    <div class="faq__list" itemscope itemtype="https://schema.org/FAQPage">
+      {faqs.map((faq, i) => (
+        <details class="faq__item reveal" style={`transition-delay: ${i * 80}ms`} itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <summary class="faq__question" itemprop="name">
+            {faq.question}
+            <svg class="faq__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="faq__answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p itemprop="text">{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq__header {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .faq__item {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq__item:first-child {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .faq__question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg) 0;
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    color: var(--color-primary);
+    cursor: pointer;
+    list-style: none;
+    min-height: 48px;
+  }
+
+  .faq__question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__icon {
+    flex-shrink: 0;
+    transition: transform var(--transition-base);
+    color: var(--color-secondary);
+  }
+
+  .faq__item[open] .faq__icon {
+    transform: rotate(45deg);
+  }
+
+  .faq__answer {
+    padding-bottom: var(--space-lg);
+  }
+
+  .faq__answer p {
+    font-size: var(--text-base);
+    color: var(--color-text-light);
+    line-height: 1.8;
+    max-width: 640px;
+    margin: 0;
+  }
+</style>

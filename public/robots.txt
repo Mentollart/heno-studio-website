@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://henostudio.pl/sitemap-index.xml

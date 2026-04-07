@@ -1,0 +1,189 @@
+---
+import { Image } from 'astro:assets';
+
+import img68 from '../assets/portfolio/mieszkanie-68-wroclaw.png';
+import img84 from '../assets/portfolio/mieszkanie-84-wroclaw.png';
+import imgTrzebnica from '../assets/portfolio/dom-trzebnica.png';
+import imgInwest from '../assets/portfolio/mieszkanie-inwestycyjne.png';
+import imgWarszawa from '../assets/portfolio/mieszkanie-warszawa.png';
+import img54 from '../assets/portfolio/mieszkanie-54-wroclaw.png';
+import imgPodWroc from '../assets/portfolio/dom-pod-wroclawiem.png';
+import imgLubin from '../assets/portfolio/dom-lubin.png';
+import img52 from '../assets/portfolio/mieszkanie-52-wroclaw.jpg';
+
+interface Props {
+  limit?: number;
+  showMore?: boolean;
+}
+
+const { limit = 6, showMore = true } = Astro.props;
+
+const projects = [
+  { name: 'Mieszkanie 68m²', location: 'Wrocław', size: '68m²', slug: 'mieszkanie-68-we-wroclawiu', image: img68, type: 'mieszkanie' },
+  { name: 'Mieszkanie 84m²', location: 'Wrocław', size: '84m²', slug: 'mieszkanie-84-we-wroclawiu', image: img84, type: 'mieszkanie' },
+  { name: 'Dom w Trzebnicy', location: 'Trzebnica', slug: 'dom-w-trzebnicy', image: imgTrzebnica, type: 'dom' },
+  { name: 'Mieszkanie inwestycyjne', location: 'Wrocław', slug: 'mieszkanie-inwestycyjne', image: imgInwest, type: 'mieszkanie' },
+  { name: 'Mieszkanie w Warszawie', location: 'Warszawa', slug: 'mieszkanie-w-warszawie', image: imgWarszawa, type: 'mieszkanie' },
+  { name: 'Mieszkanie 54m²', location: 'Wrocław', size: '54m²', slug: 'mieszkanie-54-we-wroclawiu', image: img54, type: 'mieszkanie' },
+  { name: 'Dom pod Wrocławiem', location: 'okolice Wrocławia', slug: 'dom-pod-wroclawiem', image: imgPodWroc, type: 'dom' },
+  { name: 'Dom w Lubinie', location: 'Lubin', slug: 'dom-w-lubinie', image: imgLubin, type: 'dom' },
+  { name: 'Mieszkanie 52m²', location: 'Wrocław', size: '52m²', slug: 'mieszkanie-52m-we-wrocawiu', image: img52, type: 'mieszkanie' },
+];
+
+const displayed = projects.slice(0, limit);
+---
+
+<section class="portfolio section" id="portfolio">
+  <div class="container">
+    <div class="portfolio__header reveal">
+      <div>
+        <p class="section-label">Portfolio</p>
+        <h2 class="section-title">Nasze realizacje</h2>
+        <p class="section-subtitle">Każde wnętrze to osobna historia. Poznaj projekty mieszkań i&nbsp;domów, które powstały we współpracy z&nbsp;moimi klientami.</p>
+      </div>
+      {showMore && (
+        <a href="/portfolio" class="btn btn--secondary portfolio__all-btn">
+          Wszystkie projekty
+        </a>
+      )}
+    </div>
+
+    <div class="portfolio__grid">
+      {displayed.map((project, i) => (
+        <article class="portfolio__item reveal" style={`transition-delay: ${i * 80}ms`}>
+          <div class="portfolio__img-wrap">
+            <Image
+              src={project.image}
+              alt={`Projekt wnętrza - ${project.name}, ${project.location}`}
+              widths={[400, 600, 800]}
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              format="webp"
+              quality={75}
+              loading="lazy"
+              class="portfolio__img"
+            />
+            <div class="portfolio__overlay">
+              <span class="portfolio__view">Zobacz projekt</span>
+            </div>
+          </div>
+          <div class="portfolio__info">
+            <h3 class="portfolio__name">{project.name}</h3>
+            <p class="portfolio__meta">
+              {project.location}
+              {project.size && <span> &middot; {project.size}</span>}
+            </p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .portfolio__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-3xl);
+  }
+
+  .portfolio__all-btn {
+    display: none;
+  }
+
+  .portfolio__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .portfolio__item {
+    cursor: pointer;
+  }
+
+  .portfolio__img-wrap {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    background: var(--color-bg-warm);
+  }
+
+  .portfolio__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .portfolio__item:hover .portfolio__img {
+    transform: scale(1.05);
+  }
+
+  .portfolio__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 26, 26, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--transition-base);
+  }
+
+  .portfolio__item:hover .portfolio__overlay {
+    background: rgba(26, 26, 26, 0.3);
+  }
+
+  .portfolio__view {
+    color: var(--color-white);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all var(--transition-base);
+  }
+
+  .portfolio__item:hover .portfolio__view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .portfolio__info {
+    padding: var(--space-md) 0;
+  }
+
+  .portfolio__name {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-xs);
+  }
+
+  .portfolio__meta {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    .portfolio__header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .portfolio__all-btn {
+      display: inline-flex;
+      flex-shrink: 0;
+    }
+
+    .portfolio__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .portfolio__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

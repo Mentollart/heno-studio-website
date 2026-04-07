@@ -1,0 +1,468 @@
+---
+interface Props {
+  transparent?: boolean;
+}
+
+const { transparent = false } = Astro.props;
+const currentPath = Astro.url.pathname;
+
+const navItems = [
+  { label: 'Oferta', href: '/oferta' },
+  { label: 'Portfolio', href: '/portfolio' },
+  { label: 'Proces', href: '/proces' },
+  { label: 'O Heno', href: '/o-heno' },
+  { label: 'Kontakt', href: '/kontakt' },
+];
+---
+
+<header class:list={['header', { 'header--transparent': transparent }]} id="header" data-transparent={transparent ? 'true' : 'false'}>
+  <div class="header__inner container">
+    <a href="/" class="header__logo" aria-label="Heno Studio - strona główna">
+      <img src="/images/logo.png" alt="Heno Studio" width="120" height="40" loading="eager" />
+    </a>
+
+    <nav class="header__nav" id="nav" aria-label="Menu główne">
+      <ul class="header__nav-list">
+        {navItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class:list={['header__nav-link', { active: currentPath === item.href || currentPath === item.href + '/' }]}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div class="header__nav-contact">
+        <a href="tel:+48607564257" class="header__nav-phone">+48 607 564 257</a>
+        <a href="mailto:kontakt@henostudio.com" class="btn btn--primary">Bezpłatna wycena</a>
+        <div class="header__nav-social">
+          <a href="https://facebook.com/heno.studio" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://instagram.com/heno.studio" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="header__actions">
+      <a href="tel:+48607564257" class="header__phone" aria-label="Zadzwoń: +48 607 564 257">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span class="header__phone-text">607 564 257</span>
+      </a>
+      <a href="mailto:kontakt@henostudio.com" class="btn btn--primary btn--sm header__cta">
+        Bezpłatna wycena
+      </a>
+    </div>
+
+    <button
+      class="header__hamburger"
+      id="hamburger"
+      aria-label="Otwórz menu"
+      aria-expanded="false"
+      aria-controls="nav"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Sticky Mobile CTA -->
+<div class="sticky-cta" id="sticky-cta">
+  <a href="tel:+48607564257" class="sticky-cta__phone" aria-label="Zadzwoń">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+  </a>
+  <a href="mailto:kontakt@henostudio.com" class="btn btn--primary sticky-cta__btn">
+    Umów konsultację
+  </a>
+</div>
+
+<style>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(250, 250, 248, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: all var(--transition-base);
+    height: var(--header-height);
+  }
+
+  .header.scrolled {
+    border-bottom-color: var(--color-border-light);
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* Transparent header variant (over hero) */
+  .header--transparent {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .header--transparent .header__nav-link,
+  .header--transparent .header__phone {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .header--transparent .header__nav-link:hover,
+  .header--transparent .header__phone:hover {
+    color: var(--color-white);
+  }
+
+  .header--transparent .header__nav-link.active {
+    color: var(--color-white);
+  }
+
+  .header--transparent .header__hamburger span {
+    background: var(--color-white);
+  }
+
+  .header--transparent .header__logo img {
+    filter: brightness(0) invert(1);
+  }
+
+  .header--transparent .header__cta {
+    background: var(--color-white);
+    color: var(--color-primary);
+  }
+
+  .header--transparent .header__cta:hover {
+    background: var(--color-secondary-light);
+  }
+
+  /* When transparent header scrolls, revert to solid */
+  .header--transparent.scrolled {
+    background: rgba(250, 248, 245, 0.97);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .header--transparent.scrolled .header__nav-link,
+  .header--transparent.scrolled .header__phone {
+    color: var(--color-text);
+  }
+
+  .header--transparent.scrolled .header__nav-link.active {
+    color: var(--color-secondary-dark);
+  }
+
+  .header--transparent.scrolled .header__hamburger span {
+    background: var(--color-primary);
+  }
+
+  .header--transparent.scrolled .header__logo img {
+    filter: none;
+  }
+
+  .header--transparent.scrolled .header__cta {
+    background: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    gap: var(--space-xl);
+  }
+
+  .header__logo img {
+    height: 36px;
+    width: auto;
+  }
+
+  .header__nav {
+    display: none;
+  }
+
+  .header__nav-list {
+    display: flex;
+    list-style: none;
+    gap: var(--space-xl);
+  }
+
+  .header__nav-link {
+    font-size: var(--text-sm);
+    font-weight: 400;
+    color: var(--color-text);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    position: relative;
+    padding: var(--space-xs) 0;
+  }
+
+  .header__nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background: var(--color-secondary);
+    transition: width var(--transition-base);
+  }
+
+  .header__nav-link:hover::after,
+  .header__nav-link.active::after {
+    width: 100%;
+  }
+
+  .header__nav-link.active {
+    color: var(--color-secondary-dark);
+  }
+
+  .header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+  }
+
+  .header__phone {
+    display: none;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--color-text);
+    font-size: var(--text-sm);
+    font-weight: 500;
+  }
+
+  .header__phone:hover {
+    color: var(--color-secondary-dark);
+  }
+
+  .header__cta {
+    display: none;
+  }
+
+  /* Hamburger */
+  .header__hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    min-height: 44px;
+    min-width: 44px;
+    z-index: 110;
+  }
+
+  .header__hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--color-primary);
+    transition: all var(--transition-base);
+    transform-origin: center;
+  }
+
+  .header__hamburger.open span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .header__hamburger.open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .header__hamburger.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+
+  /* Mobile Nav Contact (hidden on desktop) */
+  .header__nav-contact {
+    display: none;
+  }
+
+  /* Mobile Menu */
+  .header__nav.open {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    background: var(--color-bg);
+    z-index: 105;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2xl);
+    animation: menuSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes menuSlideIn {
+    from { opacity: 0; transform: translateX(40px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .header__nav.open .header__nav-list {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2xl);
+  }
+
+  .header__nav.open .header__nav-link {
+    font-size: var(--text-2xl);
+    font-family: var(--font-heading);
+    text-transform: none;
+    font-weight: 300;
+  }
+
+  .header__nav.open .header__nav-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+  }
+
+  .header__nav-phone {
+    font-size: var(--text-sm);
+    color: var(--color-text-light);
+    font-weight: 500;
+  }
+
+  .header__nav-social {
+    display: flex;
+    gap: var(--space-md);
+  }
+
+  .header__nav-social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    color: var(--color-text-muted);
+    transition: color var(--transition-fast);
+  }
+
+  .header__nav-social a:hover {
+    color: var(--color-secondary-dark);
+  }
+
+  /* Sticky Mobile CTA */
+  .sticky-cta {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 90;
+    background: var(--color-white);
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-sm) var(--space-md);
+    padding-bottom: calc(var(--space-sm) + env(safe-area-inset-bottom, 0px));
+    align-items: center;
+    gap: var(--space-sm);
+    transform: translateY(100%);
+    transition: transform var(--transition-base);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Hide sticky CTA on kontakt page */
+  :global(body.page-kontakt) .sticky-cta {
+    display: none !important;
+  }
+
+  .sticky-cta.visible {
+    transform: translateY(0);
+  }
+
+  .sticky-cta__phone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border: 1.5px solid var(--color-primary);
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .sticky-cta__btn {
+    flex: 1;
+    text-align: center;
+  }
+
+  /* Desktop */
+  @media (min-width: 768px) {
+    .sticky-cta {
+      display: none;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .header__nav {
+      display: flex;
+    }
+
+    .header__hamburger {
+      display: none;
+    }
+
+    .header__phone {
+      display: flex;
+    }
+
+    .header__cta {
+      display: inline-flex;
+    }
+  }
+</style>
+
+<script>
+  // Header scroll behavior
+  const header = document.getElementById('header');
+  const stickyCta = document.getElementById('sticky-cta');
+  let lastScroll = 0;
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.scrollY;
+
+    if (currentScroll > 50) {
+      header?.classList.add('scrolled');
+    } else {
+      header?.classList.remove('scrolled');
+    }
+
+    // Show sticky CTA after scrolling past hero
+    if (currentScroll > window.innerHeight * 0.5) {
+      stickyCta?.classList.add('visible');
+    } else {
+      stickyCta?.classList.remove('visible');
+    }
+
+    lastScroll = currentScroll;
+  });
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const nav = document.getElementById('nav');
+
+  hamburger?.addEventListener('click', () => {
+    const isOpen = nav?.classList.toggle('open');
+    hamburger.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  // Close menu on link click
+  nav?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('open');
+      hamburger?.classList.remove('open');
+      hamburger?.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+</script>
